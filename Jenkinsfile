@@ -28,7 +28,7 @@ pipeline {
                 script {
                     echo "building the docker image..."
                     sh "docker build -t ${IMAGE_REPO}:${IMAGE_NAME} ."
-                    sh "aws ecr get-login-password --region ${CLUSTER_REGION} | docker login --username AWS --password-stdin ${ECR_REPO_URL}"
+                    sh "aws ecr get-login-password --region ${CLUSTER_REGION} | docker login --username AWS --password-stdin $099597654282.dkr.ecr.ca-central-1.amazonaws.com/java-app"
                     sh "docker push ${IMAGE_REPO}:${IMAGE_NAME}"
                 }
             }
