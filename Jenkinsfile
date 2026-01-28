@@ -6,7 +6,7 @@ pipeline {
         gradle 'Gradle'
     }
     environment {
-        ECR_REPO_URL = '099597654282.dkr.ecr.ca-central-1.amazonaws.com/java-app'
+        ECR_REPO_URL = '099597654282.dkr.ecr.ca-central-1.amazonaws.com'
         IMAGE_REPO = "${ECR_REPO_URL}/java-app"
         IMAGE_NAME = "1.0-${BUILD_NUMBER}"
         CLUSTER_NAME = "my-cluster"
