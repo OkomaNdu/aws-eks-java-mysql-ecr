@@ -6,11 +6,11 @@ pipeline {
         gradle 'Gradle'
     }
     environment {
-        ECR_REPO_URL = '{your-aws-id}.dkr.ecr.eu-central-1.amazonaws.com'
+        ECR_REPO_URL = '099597654282.dkr.ecr.ca-central-1.amazonaws.com'
         IMAGE_REPO = "${ECR_REPO_URL}/java-app"
         IMAGE_NAME = "1.0-${BUILD_NUMBER}"
         CLUSTER_NAME = "my-cluster"
-        CLUSTER_REGION = "{your-aws-region}"
+        CLUSTER_REGION = "ca-central-1"
         AWS_ACCESS_KEY_ID = credentials('jenkins_aws_access_key_id')
         AWS_SECRET_ACCESS_KEY = credentials('jenkins_aws_secret_access_key')
     }
