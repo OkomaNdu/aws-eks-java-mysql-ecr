@@ -52,9 +52,9 @@ pipeline {
                     env.DB_ROOT_PASS = sh(script: 'echo -n $DB_ROOT_PASS_SECRET | base64', returnStdout: true).trim()
                     
                     echo 'deploying new release to EKS...'
-                    sh 'envsubst < k8s-deployment/java-app.yaml | kubectl apply -f -'
-                    sh 'envsubst < k8s-deployment/db-config.yaml | kubectl apply -f -'
-                    sh 'envsubst < k8s-deployment/db-secret.yaml | kubectl apply -f -'
+                    sh 'envsubst < k8s-deployment/java-app-cicd.yaml | kubectl apply -f -'
+                    sh 'envsubst < k8s-deployment/db-config-cicd.yaml | kubectl apply -f -'
+                    sh 'envsubst < k8s-deployment/db-secret-cicd.yaml | kubectl apply -f -'
                 }
             }
         }
