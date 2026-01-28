@@ -18,7 +18,7 @@ spec:
       - name: my-registry-key
       containers:
       - name: javamysqlapp
-        image: 099597654282.dkr.ecr.ca-central-1.amazonaws.com/java-app:java-mysql-app
+        image: ndubuisip/java-app:java-mysql-app
         ports:
         - containerPort: 8080
         env:
