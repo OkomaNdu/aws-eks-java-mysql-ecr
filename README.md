@@ -6,6 +6,9 @@
 
 ## Architecture
 
+## Architecture
+
+```mermaid
 flowchart TB
   Dev[Developer] --> SCM[Repo]
   SCM --> Jenkins[Jenkins pipeline]
@@ -33,3 +36,4 @@ flowchart TB
 
   You["Browser"] --> PF["kubectl port-forward 8081:8081"]
   PF --> PMA
+
