@@ -6,25 +6,30 @@
 
 ## Architecture
 
-```mermaid
 flowchart TB
   Dev[Developer] --> SCM[Repo]
   SCM --> Jenkins[Jenkins pipeline]
-  Jenkins --> Img[Build image]
-  Img --> ECR[Amazon ECR (TBD repo)]
-  ECR --> EKS[(EKS: my-cluster)]
+  Jenkins --> Build[Build Java app]
+  Build --> DockerBuild[Docker build]
+  DockerBuild --> Image["Image tag: 1.0-${BUILD_NUMBER}"]
+  Image --> Push["Push to ECR"]
+  Push --> ECR["ECR: 099597654282.dkr.ecr.ca-central-1.amazonaws.com/java-app"]
+  ECR --> EKSCluster
 
-  subgraph EKS[(EKS: my-cluster)]
-    subgraph EC2[EC2 worker nodes (3)]
-      MYSQL[MySQL (Helm: my-release)]
-      PMA[phpMyAdmin (svc: phpmyadmin-service)]
+  subgraph EKSCluster["Amazon EKS: my-cluster"]
+    subgraph EC2Nodes["EC2 worker nodes (3)"]
+      MYSQL["MySQL (Helm: my-release)"]
+      PMA["phpMyAdmin (svc: phpmyadmin-service)"]
     end
-    subgraph Fargate[Fargate: my-fargate-profile]
-      NS[Namespace: my-app]
-      JAVA[Java app (replicas: 3)]
+
+    subgraph FargateProfile["Fargate: my-fargate-profile"]
+      NS["Namespace: my-app"]
+      JAVA["Java app (replicas: 3)"]
     end
+
     JAVA --> MYSQL
     PMA --> MYSQL
   end
 
-  You[Browser] -->|kubectl port-forward 8081| PMA
+  You["Browser"] --> PF["kubectl port-forward 8081:8081"]
+  PF --> PMA
